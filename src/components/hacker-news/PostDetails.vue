@@ -1,31 +1,40 @@
 <template>
   <div class="post-details">
     <div v-if="loading" class="loading">Loading...</div>
+
     <div v-else-if="post" class="post-content">
-      <h1>{{ post.title }}</h1>
+      <h1 class="post-title">{{ post.title }}</h1>
+
+      <!-- Meta Information -->
       <div class="meta">
-        <span>By {{ post.author }}</span>
-        <span>{{ timeSince(post.created_at) }}</span>
-        <span>{{ post.points }} points</span>
+        <span class="meta-author">By {{ post.author }}</span>
+        <span class="meta-date">{{ timeSince(post.created_at) }}</span>
+        <span class="meta-points">{{ post.points }} points</span>
       </div>
+
+      <!-- Link to Original Post -->
       <a v-if="post.url" :href="post.url" target="_blank" class="post-link">Visit Original Link</a>
 
+      <!-- Comments Section -->
       <div class="comments-section">
-        <h2>Comments ({{ post.children?.length || 0 }})</h2>
+        <h2 class="comments-title">Comments ({{ post.children?.length || 0 }})</h2>
+
         <div v-if="post.children" class="comments">
           <div v-for="comment in post.children" :key="comment.id" class="comment">
             <div class="comment-meta">
-              <strong>{{ comment.author }}</strong>
-              <span>{{ timeSince(comment.created_at) }}</span>
+              <strong class="comment-author">{{ comment.author }}</strong>
+              <span class="comment-date">{{ timeSince(comment.created_at) }}</span>
             </div>
             <div class="comment-text" v-html="comment.text"></div>
           </div>
         </div>
       </div>
     </div>
+
     <div v-else class="error">Post not found</div>
   </div>
 </template>
+
 
 <script>
 import HNService from '../../services/HNService';
@@ -79,114 +88,150 @@ export default {
 </script>
 
 <style scoped>
+/* Post Details Wrapper */
 .post-details {
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f7f9fc;
-  border: 1px solid #dfe3e8;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #f4faff;
+  border-radius: 15px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Inter', sans-serif;
 }
 
+/* Loading State */
 .loading {
   text-align: center;
-  font-size: 1.2rem;
-  color: #7f8c8d;
-  padding: 20px 0;
+  font-size: 1.25rem;
+  color: #555;
+  margin: 2rem 0;
 }
 
-.post-content h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #34495e;
-  margin-bottom: 10px;
-}
-
-.meta {
-  font-size: 0.9rem;
-  color: #7f8c8d;
-  margin-bottom: 15px;
+/* Post Content */
+.post-content {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
+.post-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #34495e;
+  margin-bottom: 1rem;
+}
+
+/* Meta Information */
+.meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.meta span {
+  background: #f9f9f9;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+}
+
+.meta-author {
+  background: #e6f7ff;
+  color: #007bff;
+  font-weight: 600;
+}
+
+.meta-date {
+  background: #f4f4f4;
+  color: #666;
+}
+
+.meta-points {
+  background: #d3f9d8;
+  color: #28a745;
+  font-weight: 600;
+}
+
+/* Post Link */
 .post-link {
   display: inline-block;
-  margin: 15px 0;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  font-weight: bold;
-  color: #3498db;
+  font-weight: 600;
+  color: white;
+  background: #007bff;
+  border-radius: 5px;
   text-decoration: none;
-  transition: color 0.3s ease-in-out;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .post-link:hover {
-  color: #2980b9;
+  background: #0056b3;
+  transform: translateY(-2px);
 }
 
-/* Comments */
+/* Comments Section */
 .comments-section {
-  margin-top: 30px;
+  margin-top: 2rem;
 }
 
-.comments-section h2 {
+.comments-title {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
   color: #34495e;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .comment {
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #dfe3e8;
-  border-radius: 5px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comment:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .comment-meta {
-  font-size: 0.9rem;
-  color: #7f8c8d;
-  margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.5rem;
 }
 
-.comment-meta strong {
-  font-weight: bold;
+.comment-author {
+  font-weight: 600;
   color: #34495e;
 }
 
+.comment-date {
+  font-size: 0.8rem;
+  color: #999;
+}
+
 .comment-text {
-  font-size: 1rem;
-  color: #2c3e50;
+  font-size: 0.9rem;
+  color: #444;
   line-height: 1.5;
 }
 
+/* Error Message */
 .error {
   text-align: center;
-  color: #e74c3c;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  color: #dc3545;
   font-weight: bold;
-  margin: 20px 0;
-}
-
-@media (max-width: 768px) {
-  .post-details {
-    padding: 15px;
-  }
-
-  .comments-section h2 {
-    font-size: 1.2rem;
-  }
-
-  .post-content h1 {
-    font-size: 1.5rem;
-  }
+  margin: 2rem 0;
 }
 </style>

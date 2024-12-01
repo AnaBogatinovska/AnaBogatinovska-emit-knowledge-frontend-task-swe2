@@ -2,7 +2,7 @@
   <div class="task-list">
     <h1>Interactive Task List</h1>
 
-    <!-- Task Form  -->
+    <!-- Form  -->
     <div class="task-input">
       <input v-model="newTask.title" placeholder="Task Title" />
       <input v-model="newTask.description" placeholder="Task Description" />
@@ -127,175 +127,195 @@ export default {
 </script>
 
 <style scoped>
-/* Task List  */
 .task-list {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #f7f9fc;
-  border: 1px solid #dfe3e8;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+  padding: 2rem;
+  background: #f4faff;
+  border-radius: 15px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Inter', sans-serif;
 }
 
-.task-list h1 {
+h1 {
   font-size: 2rem;
-  font-weight: bold;
   color: #34495e;
-  /* Dark gray */
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  font-weight: 700;
 }
 
-/* Task form Section */
 .task-input {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr auto;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .task-input input,
 .task-input select {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #dfe3e8;
-  border-radius: 5px;
+  padding: 0.75rem;
   font-size: 1rem;
-  transition: all 0.3s ease-in-out;
+  border: 2px solid #cce7ff;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #34495e;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .task-input input:focus,
 .task-input select:focus {
-  border-color: #3498db;
   outline: none;
-  box-shadow: 0 0 4px rgba(52, 152, 219, 0.4);
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
 }
 
 .task-input button {
-  padding: 10px 20px;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #3498db;
+  background: linear-gradient(145deg, #007bff, #0056b3);
+  color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .task-input button:hover {
-  background-color: #2980b9;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 16px rgba(0, 123, 255, 0.3);
 }
 
 .filters {
   display: flex;
-  gap: 20px;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  gap: 1rem;
 }
 
 .filters label {
-  font-weight: bold;
-  color: #2c3e50;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
 }
 
 .filters select {
-  padding: 10px;
-  border: 1px solid #dfe3e8;
-  border-radius: 5px;
+  padding: 0.5rem;
   font-size: 1rem;
-  transition: all 0.3s ease-in-out;
+  border: 2px solid #cce7ff;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #34495e;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .filters select:focus {
-  border-color: #3498db;
-  outline: none;
-  box-shadow: 0 0 4px rgba(52, 152, 219, 0.4);
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
 }
 
 .tasks {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+  gap: 1.5rem;
 }
 
 .task {
-  padding: 15px;
-  border: 1px solid #dfe3e8;
-  border-radius: 5px;
-  background-color: #ffffff;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  padding: 1rem 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.task:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .task h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: #34495e;
+  margin-bottom: 0.5rem;
 }
 
 .task p {
-  margin: 5px 0;
-  color: #7f8c8d;
-}
-
-.task button {
-  padding: 8px 12px;
-  margin-top: 10px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #3498db;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.task button:hover {
-  background-color: #2980b9;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.task button:last-of-type {
-  background-color: #e74c3c;
-}
-
-.task button:last-of-type:hover {
-  background-color: #c0392b;
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0.2rem 0;
 }
 
 .task.completed {
-  background-color: #ecf8f2;
-  border-color: #2ecc71;
+  background: #d3f9d8;
+  border: 2px solid #28a745;
+  color: #155724;
 }
 
 .task.completed h3,
 .task.completed p {
   text-decoration: line-through;
-  color: #7f8c8d;
+  color: #155724;
 }
 
-.task-list p {
+.task.completed:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.task button {
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task button:first-of-type {
+  background: linear-gradient(145deg, #28a745, #218838);
+  color: white;
+}
+
+.task button:first-of-type:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 16px rgba(40, 167, 69, 0.3);
+}
+
+.task button:last-of-type {
+  background: linear-gradient(145deg, #dc3545, #c82333);
+  color: white;
+}
+
+.task button:last-of-type:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 16px rgba(220, 53, 69, 0.3);
+}
+
+p {
   text-align: center;
-  color: #7f8c8d;
+  font-size: 1rem;
+  color: #999;
   font-style: italic;
 }
 
-@media (max-width: 768px) {
-  .task-input {
-    flex-direction: column;
-  }
+.task-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
 
-  .filters {
-    flex-direction: column;
-    gap: 10px;
-  }
+.task-badge.completed {
+  background-color: #28a745;
+  color: white;
+}
+
+.task-badge.incomplete {
+  background-color: #ffc107;
+  color: #212529;
 }
 </style>

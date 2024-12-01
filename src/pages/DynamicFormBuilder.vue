@@ -7,7 +7,7 @@
             </button>
         </div>
 
-        <div class="builder-container" v-if="formFields.length" >
+        <div class="builder-container" v-if="formFields.length">
             <div class="fields-panel">
                 <div v-for="(field, index) in formFields" :key="field.id" class="field-card">
                     <FormField :field="field" :all-fields="formFields" @update:field="updateField(index, $event)"
@@ -18,8 +18,7 @@
             <div v-if="formFields.length" class="preview-panel">
                 <h2>Form Preview</h2>
                 <form @submit.prevent="handleSubmit" class="preview-form">
-                    <div v-for="field in formFields" :key="field.id" v-show="shouldShowField(field)"
-                        class="preview-field">
+                    <div v-for="field in formFields" :key="field.id" class="preview-field">
                         <label :for="field.id">
                             {{ field.label }}
                             <span v-if="field.required" class="required">*</span>
@@ -89,100 +88,142 @@ export default {
 
 <style scoped>
 .form-builder {
+    max-width: 900px;
+    margin: 0 auto;
     padding: 2rem;
+    background: #f4faff;
+    border-radius: 15px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', sans-serif;
 }
 
+/* Header */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
+.header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #34495e;
+}
+
+.header .btn-primary {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    background: linear-gradient(145deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.header .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 16px rgba(0, 123, 255, 0.3);
+}
+
+/* Builder Container */
 .builder-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     gap: 2rem;
 }
 
-.fields-panel,
-.preview-panel {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Fields Panel */
+.fields-panel {
+    flex: 1;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 400px;
 }
 
 .field-card {
-    margin-bottom: 1.5rem;
+    background: #f9f9f9;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btn-primary {
-    background: #4361ee;
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 6px;
-    cursor: pointer;
+.field-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Preview Panel */
+.preview-panel {
+    flex: 1;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.preview-panel h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #34495e;
+    margin-bottom: 1rem;
+}
+
+.preview-form {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    transition: background 0.3s ease;
-}
-
-.btn-primary:hover {
-    background: #3651d4;
-}
-
-.btn-submit {
-    background: #2ecc71;
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 100%;
-    font-weight: 500;
-    margin-top: 1.5rem;
-    transition: background 0.3s ease;
-}
-
-.btn-submit:hover {
-    background: #27ae60;
-}
-
-.form-control {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    margin-top: 0.5rem;
-}
-
-.required {
-    color: #e74c3c;
-    margin-left: 4px;
-}
-
-.preview-field {
-    margin-bottom: 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .preview-field label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
     display: block;
     margin-bottom: 0.5rem;
-    font-weight: 500;
 }
 
-h1 {
-    font-size: 1.8rem;
-    color: #2c3e50;
+.preview-field .required {
+    color: #dc3545;
 }
 
-h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: #2c3e50;
+.preview-field input,
+.preview-field select {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 2px solid #cce7ff;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.preview-field input:focus,
+.preview-field select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.btn-submit {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    background: linear-gradient(145deg, #28a745, #218838);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 16px rgba(40, 167, 69, 0.3);
 }
 </style>

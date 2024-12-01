@@ -18,69 +18,44 @@ export default {
 
 <style>
 .app-container {
-  padding: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f6f9fc 0%, #ecf0f5 100%);
 }
 
 .nav-bar {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
   display: flex;
   justify-content: center;
-  align-items: center;
-  background-color: #2c3e50;
-  padding: 15px 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  gap: 1.5rem;
 }
 
 .nav-item {
+  position: relative;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  color: #1a365d;
   text-decoration: none;
-  color: #ecf0f1;
-  font-size: 1rem;
   font-weight: 600;
-  padding: 10px 20px;
-  margin: 0 10px;
-  border-radius: 5px;
-  text-align: center;
-  transition: all 0.3s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.nav-item:hover {
-  background-color: #34495e;
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  background: transparent;
 }
 
 .nav-item div {
-  font-size: 0.85rem;
-  font-weight: 400;
-  margin-top: 5px;
-  opacity: 0.8;
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-top: 0.25rem;
 }
 
+.nav-item:hover,
 .router-link-active {
-  background-color: #e74c3c;
-  color: #ffffff;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.5);
-}
-
-.router-link-active div {
-  opacity: 1;
-}
-
-@media (max-width: 768px) {
-  .nav-bar {
-    flex-direction: column;
-    padding: 20px;
-  }
-
-  .nav-item {
-    margin: 5px 0;
-    width: 100%;
-    text-align: center;
-  }
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.2);
 }
 </style>

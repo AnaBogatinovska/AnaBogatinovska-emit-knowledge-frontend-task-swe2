@@ -45,54 +45,71 @@ export default {
 
 <style scoped>
 .field-options {
-    margin-top: 15px;
-    padding: 15px;
-    border: 1px solid #eee;
-    border-radius: 4px;
-    background-color: #f8f9fa;
+    margin-top: 1rem;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.field-options h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 1rem;
 }
 
 .option-row {
     display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .option-input {
     flex: 1;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid #cce7ff;
+    border-radius: 5px;
+    background: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.add-option-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
-}
-
-.add-option-btn:hover {
-    background-color: #45a049;
+.option-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
 }
 
 .remove-option-btn {
-    background-color: #ff4444;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    background: #dc3545;
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .remove-option-btn:hover {
-    background-color: #ff3333;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+.add-option-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-option-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.3);
 }
 </style>

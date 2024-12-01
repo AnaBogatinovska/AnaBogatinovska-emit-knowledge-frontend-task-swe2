@@ -80,80 +80,85 @@ export default {
     }
 }
 </script>
-
 <style scoped>
 .field-editor {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    padding: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background: #ffffff;
+    margin-bottom: 1rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .field-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 1rem;
 }
 
 .field-header select {
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-    min-width: 150px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid #cce7ff;
+    border-radius: 5px;
+    background: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.setting-group {
-    margin-bottom: 15px;
-}
-
-.setting-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: #2c3e50;
-}
-
-.setting-input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.checkbox-group {
-    display: flex;
-    align-items: center;
-}
-
-.checkbox-group label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
+.field-header select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
 }
 
 .remove-btn {
-    background-color: #ff4444;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    background: #dc3545;
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .remove-btn:hover {
-    background-color: #ff3333;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(220, 53, 69, 0.3);
 }
 
-.field-settings {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 6px;
+/* Field Settings */
+.field-settings .setting-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.field-settings .setting-input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 2px solid #cce7ff;
+    border-radius: 5px;
+    background: #ffffff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.field-settings .setting-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.field-settings .checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.field-settings .checkbox-group label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #555;
+    margin-left: 0.5rem;
 }
 </style>

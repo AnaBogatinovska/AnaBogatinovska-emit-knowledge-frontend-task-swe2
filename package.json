@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "aws s3 sync --profile ana --delete dist s3://emkn-demo.anabogatinovska.com && npm run invalidate",
+    "deploy": "npm run build && aws s3 sync --profile ana --delete dist s3://emkn-demo.anabogatinovska.com && npm run invalidate",
     "invalidate": "aws cloudfront --profile ana create-invalidation --distribution-id E1OFRGSJ1CQKFN --paths \"/*\" --output json"
   },
   "dependencies": {

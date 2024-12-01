@@ -1,140 +1,159 @@
 <template>
-    <div v-if="field.visible" class="form-field">
-        <label :for="field.id" class="field-label">{{ field.label }} {{ field.validation.required ? '*' : '' }}</label>
-
-        <div class="long" style="display: flex;">
-            <!-- Text Field -->
-            <input v-if="field.type === 'text'" :id="field.id" type="text" v-model="localValue"
-                :placeholder="field.placeholder" class="field-input" />
-
-            <!-- Number Field -->
-            <input v-if="field.type === 'number'" :id="field.id" type="number" v-model.number="localValue"
-                :min="field.min" :max="field.max" class="field-input" />
-
-            <!-- Dropdown Field -->
-            <select v-if="field.type === 'dropdown'" :id="field.id" v-model="localValue" class="field-select">
-                <option value="">Select an option</option>
-                <option v-for="option in field.options" :key="option.value" :value="option.value">
-                    {{ option.label }}
-                </option>
+    <div class="field-editor">
+        <div class="field-header">
+            <select v-model="fieldData.type" @change="updateFieldData">
+                <option value="text">Text Input</option>
+                <option value="number">Number Input</option>
+                <option value="checkbox">Checkbox</option>
+                <option value="select">Dropdown</option>
             </select>
+            <button @click="$emit('remove')" class="remove-btn">Remove</button>
         </div>
 
-        <!-- Checkbox Field -->
-        <input v-if="field.type === 'checkbox'" :id="field.id" type="checkbox" v-model="localValue"
-            class="field-checkbox" />
+        <div class="field-settings">
+            <div class="setting-group">
+                <label>Field Label:</label>
+                <input type="text" v-model="fieldData.label" @input="updateFieldData" placeholder="Enter field label"
+                    class="setting-input" />
+            </div>
 
-        <div v-if="errors.length" class="field-errors">
-            <p v-for="error in errors" :key="error" class="error-message">{{ error }}</p>
+            <div class="setting-group">
+                <label>Field Name:</label>
+                <input type="text" v-model="fieldData.name" @input="updateFieldData" placeholder="Enter field name"
+                    class="setting-input" />
+            </div>
+
+            <div class="setting-group checkbox-group">
+                <label>
+                    <input type="checkbox" v-model="fieldData.required" @change="updateFieldData" />
+                    Required Field
+                </label>
+            </div>
+
+            <FieldOptions v-if="isDropdown" v-model="fieldData.options" @update:options="updateOptions" />
         </div>
     </div>
 </template>
 
 <script>
+import FieldOptions from './FieldOptions.vue'
+
 export default {
     name: 'FormField',
+    components: {
+        FieldOptions
+    },
     props: {
         field: {
             type: Object,
             required: true
         },
-        modelValue: {
-            type: [String, Number, Boolean],
-            default: null
+        allFields: {
+            type: Array,
+            required: true
         }
     },
     data() {
         return {
-            errors: []
+            fieldData: { ...this.field }
         }
     },
     computed: {
-        localValue: {
-            get() {
-                return this.modelValue
-            },
-            set(value) {
-                this.$emit('update:modelValue', value)
-                this.validate()
-            }
+        isDropdown() {
+            return this.fieldData.type === 'select'
+        },
+        hasAvailableFields() {
+            return this.availableFields.length > 0
+        },
+        availableFields() {
+            return this.allFields.filter(f => f.id !== this.field.id)
         }
     },
     methods: {
-        validate() {
-            this.errors = []; 
-            const fieldErrors = this.field.validate();
-            if (fieldErrors.length > 0 && !this.localValue) {
-                this.errors = fieldErrors;
-            }
+        updateFieldData() {
+            this.$emit('update:field', { ...this.fieldData })
         },
-        showErrors(errors) {
-            this.errors = errors;
-        },
-        clearErrors() {
-            this.errors = [];
+        updateOptions(options) {
+            this.fieldData.options = options
+            this.updateFieldData()
         }
     }
 }
 </script>
 
 <style scoped>
-.form-field {
+.field-editor {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
 }
 
-.field-label {
+.field-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.field-header select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    min-width: 150px;
+}
+
+.setting-group {
+    margin-bottom: 15px;
+}
+
+.setting-group label {
     display: block;
-    font-size: 1rem;
-    font-weight: bold;
+    margin-bottom: 5px;
+    font-weight: 500;
     color: #2c3e50;
-    margin-bottom: 8px;
 }
 
-.form-field .long {
-    display: flex;
+.setting-input {
     width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
-.form-field .long .field-input,
-.form-field .long .field-select {
-    flex: 1;
+.checkbox-group {
+    display: flex;
+    align-items: center;
 }
 
-.field-input,
-.field-select {
-    padding: 10px;
-    border: 1px solid #dfe3e8;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: all 0.3s ease-in-out;
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
 }
 
-.field-input:focus,
-.field-select:focus {
-    border-color: #3498db;
-    outline: none;
-    box-shadow: 0 0 4px rgba(52, 152, 219, 0.4);
+.remove-btn {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
 }
 
-.field-checkbox {
-    margin-right: 8px;
+.remove-btn:hover {
+    background-color: #ff3333;
 }
 
-.field-errors {
-    margin-top: 8px;
-    color: #e74c3c;
-}
-
-.error-message {
-    font-size: 0.9rem;
-    margin: 0;
-}
-
-.field-input::placeholder {
-    color: #bdc3c7;
-    font-style: italic;
+.field-settings {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
 }
 </style>

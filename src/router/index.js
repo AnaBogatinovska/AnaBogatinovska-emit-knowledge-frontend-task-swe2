@@ -1,5 +1,6 @@
 import PostDetails from '@/components/hacker-news/PostDetails.vue';
-import DynamicForm from '@/pages/DynamicForm.vue';
+import DynamicFormBuilder from '@/pages/DynamicFormBuilder.vue';
+
 import HackerNews from '@/pages/HackerNews.vue';
 import TaskList from '@/pages/TaskList.vue';
 import { createRouter, createWebHistory } from 'vue-router';
@@ -11,8 +12,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 const routes = [
   {
     path: '/',
-    name: 'Dynamic Form',
-    component: DynamicForm,
+    name: 'Dynamic Form Builder',
+    component: DynamicFormBuilder,
   },
   {
     path: '/task-list',

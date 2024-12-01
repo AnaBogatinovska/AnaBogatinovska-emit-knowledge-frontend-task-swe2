@@ -1,45 +1,17 @@
 <template>
   <div class="search-bar">
-    <input type="text" v-model="query" placeholder="Search Hacker News..." @input="handleInput" />
-
-    <ul v-if="results.length" class="search-results">
-      <li v-for="result in results" :key="result.objectID" @click="selectPost(result.objectID)">
-        {{ result.title }}
-      </li>
-    </ul>
+    <input type="text" v-model="query" placeholder="Search Hacker News..." @input="$emit('searchQuery', query)" />
   </div>
 </template>
 
-
 <script>
-import HNService from '../../services/HNService';
-
 export default {
   name: 'SearchBar',
-  emits: ['selectPost'],
+  emits: ['searchQuery'],
   data() {
     return {
-      query: '',
-      results: [],
-      hnService: new HNService()
+      query: ''
     };
-  },
-  methods: {
-    handleInput() {
-      if (this.query.trim() === '') {
-        this.results = [];
-        return;
-      }
-      this.hnService.searchPosts(this.query, (results) => {
-        this.results = results;
-        console.log(results);
-      });
-    },
-    selectPost(id) {
-      this.$emit('selectPost', id);
-      this.results = [];
-      this.query = '';
-    }
   }
 };
 </script>

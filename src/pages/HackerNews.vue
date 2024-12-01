@@ -1,9 +1,8 @@
 <template>
   <div class="app-container">
-    <SearchBar @selectPost="handleSelectPost" />
-
+    <SearchBar @searchQuery="updateQuery" />
     <section class="content">
-      <PostList></PostList>
+      <PostList ref="postList" @clearDebounce="removeDebounce" />
     </section>
   </div>
 </template>
@@ -14,12 +13,23 @@ import SearchBar from '../components/hacker-news/SearchBar.vue';
 
 export default {
   components: { SearchBar, PostList },
-  methods: {
-    handleSelectPost(id) {
-      console.log(id);
-      this.$router.push(`details/${id}`);
-    },
+  data() {
+    return {
+
+    }
   },
+  methods: {
+    updateQuery(query) {
+      this.debounceTimeout = setTimeout(() => {
+        this.$refs.postList.filterPosts(query);
+
+
+      }, 250);
+    },
+    removeDebounce() {
+      clearTimeout(this.debounceTimeout);
+    }
+  }
 };
 </script>
 

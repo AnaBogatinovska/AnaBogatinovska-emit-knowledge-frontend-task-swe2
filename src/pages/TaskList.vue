@@ -17,18 +17,22 @@
 
     <!-- Filters  -->
     <div class="filters">
-      <label>Filter By:</label>
-      <select v-model="filterStatus">
-        <option value="">All Tasks</option>
-        <option value="completed">Completed</option>
-        <option value="incomplete">Incomplete</option>
-      </select>
-      <label>Sort By:</label>
-      <select v-model="sortOption">
-        <option value="alphabetical">Alphabetical</option>
-        <option value="date">Date</option>
-        <option value="priority">Priority</option>
-      </select>
+      <div>
+        <label>Filter By:</label>
+        <select v-model="filterStatus">
+          <option value="">All Tasks</option>
+          <option value="completed">Completed</option>
+          <option value="incomplete">Incomplete</option>
+        </select>
+      </div>
+      <div>
+        <label>Sort By:</label>
+        <select v-model="sortOption">
+          <option value="alphabetical">Alphabetical</option>
+          <option value="date">Date</option>
+          <option value="priority">Priority</option>
+        </select>
+      </div>
     </div>
 
     <!-- Task List -->
@@ -147,9 +151,15 @@ h1 {
 
 .task-input {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr auto;
   gap: 1rem;
   margin-bottom: 2rem;
+}
+
+
+@media only screen and (min-width: 600px) {
+  .task-input {
+    grid-template-columns: 1fr 1fr 1fr auto;
+  }
 }
 
 .task-input input,

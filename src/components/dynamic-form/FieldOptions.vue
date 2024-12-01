@@ -60,8 +60,6 @@ export default {
 }
 
 .option-row {
-    display: flex;
-    gap: 1rem;
     margin-bottom: 1rem;
 }
 
@@ -73,6 +71,7 @@ export default {
     border-radius: 5px;
     background: #ffffff;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 1em;
 }
 
 .option-input:focus {

@@ -99,10 +99,16 @@ export default {
 
 /* Header */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 1.5rem;
+}
+
+@media only screen and (min-width: 600px) {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
 }
 
 .header h1 {
@@ -129,9 +135,14 @@ export default {
 }
 
 /* Builder Container */
-.builder-container {
-    display: flex;
-    gap: 2rem;
+
+
+@media only screen and (min-width: 600px) {
+    .builder-container {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
 }
 
 /* Fields Panel */
@@ -141,8 +152,6 @@ export default {
     padding: 1.5rem;
     border-radius: 15px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    max-height: 400px;
 }
 
 .field-card {

@@ -91,10 +91,25 @@ export default {
 }
 
 .field-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 1rem;
+}
+
+@media only screen and (min-width: 600px) {
+    .field-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .field-header select {
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 2px solid #cce7ff;
+        border-radius: 5px;
+        margin-bottom: 0rem;
+        background: #ffffff;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
 }
 
 .field-header select {
@@ -103,6 +118,7 @@ export default {
     border: 2px solid #cce7ff;
     border-radius: 5px;
     background: #ffffff;
+    margin-bottom: 1rem;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 

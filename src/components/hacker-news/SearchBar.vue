@@ -19,14 +19,13 @@ export default {
 <style scoped>
 /* Search Bar Wrapper */
 .search-bar {
-  max-width: 800px;
-  margin: 0 auto 2rem;
-  position: relative;
+    display: flex;
+    position: relative;
 }
 
 /* Search Input */
 .search-bar input {
-  width: 100%;
+  flex: 1;
   padding: 0.75rem 1rem;
   font-size: 1rem;
   border: 2px solid #cce7ff;

@@ -32,6 +32,14 @@ export default {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
+  flex-direction: column;
+}
+
+
+@media only screen and (min-width: 600px) {
+  .nav-bar {
+    flex-direction: row;
+  }
 }
 
 .nav-item {
